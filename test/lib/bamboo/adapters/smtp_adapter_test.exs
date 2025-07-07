@@ -794,6 +794,7 @@ defmodule Bamboo.SMTPAdapterTest do
     bamboo_email =
       @email_in_utf8
       |> new_email()
+
     bamboo_config = configuration()
     {:ok, "200 Ok 1234567890"} = SMTPAdapter.deliver(bamboo_email, bamboo_config)
     [{{from, to, _raw_email}, _gen_smtp_config}] = FakeGenSMTP.fetch_sent_emails()
@@ -803,7 +804,6 @@ defmodule Bamboo.SMTPAdapterTest do
     assert Enum.member?(to, "joe@xn--mjor-goa.com")
     assert Enum.member?(to, "mary@major.com")
   end
-
 
   defp format_email(emails), do: format_email(emails, true)
 
